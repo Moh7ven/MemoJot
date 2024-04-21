@@ -1,5 +1,5 @@
 import s from "./style.module.css";
 
-export default function PageNotFound() {
-  return <div className={s.container}>Page note found</div>;
+export function PageNotFound() {
+  return <div className={s.container}>404 - Page note found</div>;
 }
