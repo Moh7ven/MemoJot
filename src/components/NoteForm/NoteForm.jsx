@@ -18,9 +18,13 @@ const VALIDATORS = {
 export function NoteForm({ title, onClickEdit, onClickTrash, onSubmit }) {
   const [formValues, setFormValues] = useState({ title: "", content: "" });
   const [formErrors, setFormErrors] = useState({
-    title: undefined,
-    content: undefined,
+    title: "",
+    content: "",
   });
+
+  function hasErrors() {
+    return Object.values(formErrors).some((error) => error !== undefined);
+  }
 
   function updateFormValues(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -76,7 +80,12 @@ export function NoteForm({ title, onClickEdit, onClickTrash, onSubmit }) {
 
   const submitButton = (
     <div className={s.submit_btn}>
-      <ButtonPrimary onClick={() => onSubmit(formValues)}>Submit</ButtonPrimary>
+      <ButtonPrimary
+        isDisabled={hasErrors()}
+        onClick={() => onSubmit(formValues)}
+      >
+        Submit
+      </ButtonPrimary>
     </div>
   );
   return (
