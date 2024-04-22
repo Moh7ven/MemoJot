@@ -13,5 +13,4 @@ export const noteSlice = createSlice({
 });
 
 export const noteReducer = noteSlice.reducer;
-
 export const { setNoteList } = noteSlice.actions;

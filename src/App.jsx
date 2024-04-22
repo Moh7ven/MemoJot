@@ -13,7 +13,8 @@ export function App() {
   }
   useEffect(() => {
     fetchAllNotes();
-  }, []);
+    //Tableau vide parce qu'on appelle la fonction une seule fois
+  });
 
   return (
     <div className="container-fluid">
