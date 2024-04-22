@@ -1,15 +1,16 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import s from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { NoteForm } from "components/NoteForm/NoteForm";
 import { useState } from "react";
 import { NoteApi } from "api/note-api";
-import { updateNote } from "store/Note/note-slice";
+import { deleteNote, updateNote } from "store/Note/note-slice";
 
 export function Note(props) {
   const [isEditable, setIsEditable] = useState(false);
   const { noteId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const [searchParams] = useSearchParams();
   const note = useSelector((store) =>
     store.NOTE.noteList.find((note) => note.id === noteId)
@@ -22,6 +23,14 @@ export function Note(props) {
     setIsEditable(false);
   }
 
+  function deleteNote_(note) {
+    if (window.confirm("Are you sure you want to delete this note ?")) {
+      NoteApi.deleteById(note.id);
+      dispatch(deleteNote(note.id));
+      navigate("/");
+    }
+  }
+
   return (
     <>
       {/* {searchParams.get("truc")} */}
@@ -31,7 +40,7 @@ export function Note(props) {
           title={isEditable ? "Edit Note" : note.title}
           note={note}
           onClickEdit={() => setIsEditable(!isEditable)}
-          onClickTrash={() => ""}
+          onClickTrash={() => deleteNote_(note)}
           onSubmit={isEditable && submit}
         />
       )}

@@ -56,7 +56,7 @@ export function NoteForm({
       </div>
       <div className="col-1">
         {onClickTrash && (
-          <TrashFill onClickTrash={onClickTrash} className={s.icon} />
+          <TrashFill onClick={onClickTrash} className={s.icon} />
         )}
       </div>
     </>

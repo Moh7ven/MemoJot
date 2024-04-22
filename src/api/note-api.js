@@ -13,7 +13,7 @@ export class NoteApi {
     return this.formatId((await axios.get(`${BASE_URL}/${noteId}`)).data);
   }
   static async deleteById(noteId) {
-    return (await axios.del(`${BASE_URL}/${noteId}`)).data;
+    return (await axios.delete(`${BASE_URL}/${noteId}`)).data;
   }
   static async update(note) {
     return this.formatId(
