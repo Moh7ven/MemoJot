@@ -15,7 +15,14 @@ const VALIDATORS = {
   },
 };
 
-export function NoteForm({ title, onClickEdit, onClickTrash, onSubmit }) {
+export function NoteForm({
+  isEditable = true,
+  note,
+  title,
+  onClickEdit,
+  onClickTrash,
+  onSubmit,
+}) {
   const [formValues, setFormValues] = useState({ title: "", content: "" });
   const [formErrors, setFormErrors] = useState({
     title: "",
@@ -96,8 +103,11 @@ export function NoteForm({ title, onClickEdit, onClickTrash, onSubmit }) {
         </div>
         {actionIcons}
       </div>
-      <div className={`mb-3 ${s.title_input}`}>{titleInput}</div>
-      <div className={`mb-3`}>{contentInput}</div>
+      <div className={`mb-3 ${s.title_input}`}>{isEditable && titleInput}</div>
+      <div className={`mb-3`}>
+        {isEditable ? contentInput : <pre>{note.content}</pre>}
+        {/* Pre va prendre en compte les sauts de lignes */}
+      </div>
       {onSubmit && submitButton}
     </div>
   );
