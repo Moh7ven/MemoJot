@@ -1,15 +1,25 @@
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import { ButtonPrimary } from "components/ButtonPrimary/ButtonPrimary";
+import { useState } from "react";
 
-export function NoteForm({ title }) {
+export function NoteForm({ title, onClickEdit, onClickTrash, onSubmit }) {
+  const [formValues, setFormValues] = useState({ title: "", content: "" });
+
+  function updateFormValues(e) {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  }
+
+
   const actionIcons = (
     <>
       <div className="col-1">
-        <PencilFill className={s.icon} />
+        {onClickEdit && <PencilFill onClick={onClickEdit} className={s.icon} />}
       </div>
       <div className="col-1">
-        <TrashFill className={s.icon} />
+        {onClickTrash && (
+          <TrashFill onClickTrash={onClickTrash} className={s.icon} />
+        )}
       </div>
     </>
   );
@@ -17,20 +27,31 @@ export function NoteForm({ title }) {
   const titleInput = (
     <>
       <label className="form-label">Title</label>
-      <input type="text" name="title" className="form-control" />
+      <input
+        type="text"
+        name="title"
+        className="form-control"
+        onChange={updateFormValues}
+      />
     </>
   );
 
   const contentInput = (
     <>
       <label className="form-label">Content</label>
-      <textarea type="text" name="content" className="form-control" row="5" />
+      <textarea
+        type="text"
+        name="content"
+        className="form-control"
+        row="5"
+        onChange={updateFormValues}
+      />
     </>
   );
 
   const submitButton = (
     <div className={s.submit_btn}>
-      <ButtonPrimary>Submit</ButtonPrimary>
+      <ButtonPrimary onClick={() => onSubmit(formValues)}>Submit</ButtonPrimary>
     </div>
   );
   return (
@@ -43,7 +64,7 @@ export function NoteForm({ title }) {
       </div>
       <div className={`mb-3 ${s.title_input}`}>{titleInput}</div>
       <div className={`mb-3`}>{contentInput}</div>
-      {submitButton}
+      {onSubmit && submitButton}
     </div>
   );
 }
