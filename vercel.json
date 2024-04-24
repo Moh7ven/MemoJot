@@ -1,0 +1,14 @@
+
+{
+    "routes": [
+      { "handle": "filesystem" },
+      {
+        "src": "/(.*)",
+        "dest": "http://localhost:3200/$1"
+      },
+      { "src": "/(.*)", "dest": "/index.html" }
+    ],
+    "env": {
+      "PORT": "3000"
+    }
+  }
