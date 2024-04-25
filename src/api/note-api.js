@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:3000/MemoJot/api/v1";
 
-const BASE_URL_PRODUCTION = "https://memojot-api.onrender.com/api/v1";
+const BASE_URL_PRODUCTION = "https://memojot-api.onrender.com/MemoJot/api/v1";
 
 export class NoteApi {
   static async create(note) {
