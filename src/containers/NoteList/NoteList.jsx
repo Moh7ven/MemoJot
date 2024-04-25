@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import s from "./style.module.css";
 import { TextCard } from "components/TextCard/TextCard";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,10 @@ export function NoteList({ noteList }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function deleteNote_(note) {
+  async function deleteNote_(note) {
     if (window.confirm("Are you sure you want to delete this note ?")) {
-      NoteApi.deleteById(note.id);
-      dispatch(deleteNote(note.id));
+      await NoteApi.deleteById(note._id);
+      dispatch(deleteNote(note._id));
     }
   }
 
@@ -20,12 +20,12 @@ export function NoteList({ noteList }) {
     <div className={`row justify-content-center `}>
       {noteList.map((note) => {
         return (
-          <div key={note.id} className={s.card_container}>
+          <div key={note._id} className={s.card_container}>
             <TextCard
               title={note.title}
               subtitle={note.created_at}
               content={note.content}
-              onClick={() => navigate(`/note/${note.id}`)}
+              onClick={() => navigate(`/note/${note._id}`)}
               onClickTrash={() => deleteNote_(note)}
             />
           </div>

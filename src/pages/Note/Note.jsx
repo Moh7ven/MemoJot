@@ -1,5 +1,5 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import s from "./style.module.css";
+import { useNavigate, useParams } from "react-router-dom";
+// import s from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { NoteForm } from "components/NoteForm/NoteForm";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export function Note(props) {
   const navigate = useNavigate();
   // const [searchParams] = useSearchParams();
   const note = useSelector((store) =>
-    store.NOTE.noteList.find((note) => note.id === noteId)
+    store.NOTE.noteList.find((note) => note._id === noteId)
   );
 
   async function submit(formValues) {
@@ -25,8 +25,8 @@ export function Note(props) {
 
   function deleteNote_(note) {
     if (window.confirm("Are you sure you want to delete this note ?")) {
-      NoteApi.deleteById(note.id);
-      dispatch(deleteNote(note.id));
+      NoteApi.deleteById(note._id);
+      dispatch(deleteNote(note._id));
       navigate("/");
     }
   }
