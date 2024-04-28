@@ -11,26 +11,31 @@ export function NoteList({ noteList }) {
 
   async function deleteNote_(note) {
     if (window.confirm("Are you sure you want to delete this note ?")) {
-      await NoteApi.deleteById(note._id);
-      dispatch(deleteNote(note._id));
+      try {
+        await NoteApi.deleteById(note._id);
+        dispatch(deleteNote(note._id));
+      } catch (error) {
+        console.error("Error deleting note:", error);
+      }
     }
   }
 
   return (
     <div className={`row justify-content-center `}>
-      {noteList.map((note) => {
-        return (
-          <div key={note._id} className={s.card_container}>
-            <TextCard
-              title={note.title}
-              subtitle={note.created_at}
-              content={note.content}
-              onClick={() => navigate(`/note/${note._id}`)}
-              onClickTrash={() => deleteNote_(note)}
-            />
-          </div>
-        );
-      })}
+      {noteList &&
+        noteList.map((note) => {
+          return (
+            <div key={note._id} className={s.card_container}>
+              <TextCard
+                title={note.title}
+                subtitle={note.created_at}
+                content={note.content}
+                onClick={() => navigate(`/note/${note._id}`)}
+                onClickTrash={() => deleteNote_(note)}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 }

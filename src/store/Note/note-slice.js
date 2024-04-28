@@ -14,13 +14,13 @@ export const noteSlice = createSlice({
     },
     updateNote: (currentSlice, action) => {
       const indexToUpdate = currentSlice.noteList.findIndex(
-        (note) => note.id === action.payload.id
+        (note) => note._id === action.payload._id
       );
       currentSlice.noteList[indexToUpdate] = action.payload;
     },
     deleteNote: (currentSlice, action) => {
       const filteredNoteList = currentSlice.noteList.filter(
-        (note) => note.id !== action.payload
+        (note) => note._id !== action.payload
       );
       currentSlice.noteList = filteredNoteList;
     },
@@ -28,4 +28,5 @@ export const noteSlice = createSlice({
 });
 
 export const noteReducer = noteSlice.reducer;
-export const { setNoteList, addNote, updateNote, deleteNote } = noteSlice.actions;
+export const { setNoteList, addNote, updateNote, deleteNote } =
+  noteSlice.actions;

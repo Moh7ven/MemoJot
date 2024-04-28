@@ -17,15 +17,15 @@ export function Note(props) {
   );
 
   async function submit(formValues) {
-    const updatedNote = await NoteApi.update({ ...formValues, id: note.id });
+    const updatedNote = await NoteApi.update({ ...formValues, _id: note._id });
 
-    dispatch(updateNote(updatedNote));
+    dispatch(updateNote(updatedNote.data));
     setIsEditable(false);
   }
 
-  function deleteNote_(note) {
+  async function deleteNote_(note) {
     if (window.confirm("Are you sure you want to delete this note ?")) {
-      NoteApi.deleteById(note._id);
+      await NoteApi.deleteById(note._id);
       dispatch(deleteNote(note._id));
       navigate("/");
     }

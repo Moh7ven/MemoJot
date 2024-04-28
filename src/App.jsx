@@ -10,7 +10,7 @@ export function App() {
   const dispatch = useDispatch();
   async function fetchAllNotes() {
     const noteList = await NoteApi.fetchAll();
-    dispatch(setNoteList(noteList));
+    dispatch(setNoteList(noteList.data));
   }
   useEffect(() => {
     fetchAllNotes();

@@ -9,17 +9,20 @@ export function NoteBrowse() {
   const [searchText, setSearchText] = useState("");
 
   const noteList = useSelector((store) => store.NOTE.noteList);
-  const filteredNoteList = noteList.filter((note) => {
-    const containsTitle = note.title
-      .toUpperCase()
-      .includes(searchText.trim().toUpperCase());
 
-    const containsContent = note.content
-      .toUpperCase()
-      .includes(searchText.trim().toUpperCase());
+  const filteredNoteList =
+    noteList &&
+    noteList.filter((note) => {
+      const containsTitle = note.title
+        .toUpperCase()
+        .includes(searchText.trim().toUpperCase());
 
-    return containsTitle || containsContent;
-  });
+      const containsContent = note.content
+        .toUpperCase()
+        .includes(searchText.trim().toUpperCase());
+
+      return containsTitle || containsContent;
+    });
 
   return (
     <>

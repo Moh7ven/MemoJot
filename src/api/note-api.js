@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/MemoJot/api/v1";
+/* const BASE_URL = "http://localhost:3000/MemoJot/api/v1"; */
 
 const BASE_URL_PRODUCTION = "https://memojot-api.onrender.com/MemoJot/api/v1";
 
@@ -25,7 +25,7 @@ export class NoteApi {
     /* return this.formatId(
       (await axios.patch(`${BASE_URL_PRODUCTION}/${note.id}`, note)).data */
     return (
-      await axios.patch(`${BASE_URL_PRODUCTION}/updateNote/${note.id}`, note)
+      await axios.put(`${BASE_URL_PRODUCTION}/updateNote/${note._id}`, note)
     ).data;
   }
 
