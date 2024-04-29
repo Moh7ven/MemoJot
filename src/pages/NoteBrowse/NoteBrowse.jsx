@@ -10,6 +10,7 @@ export function NoteBrowse() {
 
   const noteList = useSelector((store) => store.NOTE.noteList);
 
+  // Filter notes
   const filteredNoteList =
     noteList &&
     noteList.filter((note) => {
