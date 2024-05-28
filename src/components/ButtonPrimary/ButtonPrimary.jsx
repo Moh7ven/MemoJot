@@ -1,6 +1,7 @@
 import s from "./style.module.css";
 
 export const ButtonPrimary = ({ children, onClick, isDisabled }) => {
+  // The ButtonPrimary component
   return (
     <button
       disabled={isDisabled}
