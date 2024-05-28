@@ -1,5 +1,6 @@
 import s from "./style.module.css";
 
 export function FieldError({ msg }) {
-    return <span className={s.container}>{msg}</span>;
+  // The FieldError component
+  return <span className={s.container}>{msg}</span>;
 }
